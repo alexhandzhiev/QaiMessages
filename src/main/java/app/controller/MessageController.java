@@ -1,12 +1,9 @@
 package app.controller;
 
 import app.model.EmoteType;
-import app.model.Message;
 import app.model.MessageType;
 import app.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -30,11 +27,11 @@ public class MessageController {
         if(type.equalsIgnoreCase("send_emotion")) {
             messageService.send(new EmoteType(payload, "here"));
         }
-        return new ResponseEntity(HttpEntity.EMPTY, new HttpHeaders(), HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity handleMissingParam() {
-        return new ResponseEntity(HttpEntity.EMPTY, new HttpHeaders(), HttpStatus.PRECONDITION_FAILED);
+        return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).build();
     }
 }
