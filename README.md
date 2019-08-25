@@ -26,3 +26,9 @@ Every request to this endpoint should also be stored in a database table with th
 We also expect to have unit tests for the application. 
 
 When we run the test suite the database should not be populated with test data (the ORM should be mocked/stubbed). 
+
+# Database
+
+The database is embedded H2.
+
+Accessed in a humanly manner at: http://localhost:8080/console
