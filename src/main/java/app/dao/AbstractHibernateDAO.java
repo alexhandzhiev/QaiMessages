@@ -8,6 +8,10 @@ import javax.persistence.PersistenceUnit;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Extend to get access to CRUD operations for a concrete entity
+ * @param <T>
+ */
 public abstract class AbstractHibernateDAO<T extends Serializable> {
 
     @PersistenceUnit

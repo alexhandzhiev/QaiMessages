@@ -1,5 +1,8 @@
 package app.exception;
 
+/**
+ * Encapsulates message related exceptions.
+ */
 public class MessageException extends RuntimeException {
 
     public MessageException(String message) {

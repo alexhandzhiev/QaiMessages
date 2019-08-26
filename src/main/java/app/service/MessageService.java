@@ -14,12 +14,22 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.Set;
 
+/**
+ * Where message related business logic is based.
+ */
 @Service
 public class MessageService {
 
     @Autowired
     MessageDAO messageDAO;
 
+    /**
+     * Emoiton payload is validated here. Should not be null/empty or containing digits.
+     * Length 2-10 is validated by Hibernate.
+     * @param msg
+     * @return
+     * @throws MessageException
+     */
     public EmoteType send(EmoteType msg) throws MessageException {
 
         if (StringUtils.isEmpty(msg.getPayload())) {
@@ -34,6 +44,13 @@ public class MessageService {
         return msg;
     }
 
+    /**
+     * Message payload is validated here. Should not be null/empty.
+     * Length 1-160 is validated by Hibernate.
+     * @param msg
+     * @return
+     * @throws MessageException
+     */
     public MessageType send(MessageType msg) throws MessageException {
 
         if (StringUtils.isEmpty(msg.getPayload())) {
