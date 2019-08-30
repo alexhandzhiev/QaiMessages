@@ -10,16 +10,19 @@ public class Message implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+    int id;
     @Column(name = "message_type")
-    protected String type;
+    MessageEnum type;
+    @Column(name = "payload")
+    String payload;
     @Column(name = "created_at")
-    protected String createdAt;
+    String createdAt;
 
     public Message() {}
 
-    public Message(String type, String createdAt) {
+    public Message(MessageEnum type, String payload, String createdAt) {
         this.type = type;
+        this.payload = payload;
         this.createdAt = createdAt;
     }
 
@@ -27,9 +30,13 @@ public class Message implements Serializable {
         return id;
     }
 
-    public String getType() {
+    public MessageEnum getType() {
         return type;
     }
+
+    public String getPayload() {
+        return payload;
+    };
 
     public String getCreatedAt() {
         return createdAt;

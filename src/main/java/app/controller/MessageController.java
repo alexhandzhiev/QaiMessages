@@ -1,6 +1,8 @@
 package app.controller;
 
 import app.model.EmoteType;
+import app.model.Message;
+import app.model.MessageEnum;
 import app.model.MessageType;
 import app.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +33,7 @@ public class MessageController {
     @ResponseBody
     public ResponseEntity send(@PathVariable(value="type", required = true) String type,
                                @RequestParam(value = "payload", required = false) String payload) {
-        //required here is false, so we can handle 'payload' later, otherwise it will return 'Bad Request 400'
-        if(type.equalsIgnoreCase("send_message")) {
-            messageService.send(new MessageType(payload, "here"));
-        }
-        if(type.equalsIgnoreCase("send_emotion")) {
-            messageService.send(new EmoteType(payload, "here"));
-        }
+        messageService.send(new Message(MessageEnum.valueOf(type.toUpperCase()), payload, "here"));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
