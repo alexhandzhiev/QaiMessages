@@ -2,20 +2,13 @@ package app.service;
 
 import app.dao.MessageDAO;
 import app.exception.MessageException;
-import app.model.EmoteType;
 import app.model.Message;
-import app.model.MessageEnum;
-import app.model.MessageType;
 import app.validation.Validator;
 import app.validation.ValidatorFactory;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.util.Set;
 
 /**
  * Where message related business logic is based.
@@ -55,13 +48,6 @@ public class MessageService {
             messageDAO.save(msg);
         } catch (HibernateException he) {
             throw new MessageException(he.getMessage(), he);
-        } catch (ConstraintViolationException cv) {
-            String violationMsg = "";
-            Set<ConstraintViolation<?>> violations = cv.getConstraintViolations();
-            for (ConstraintViolation<?> violation : violations) {
-                violationMsg = violation.getMessage();
-            }
-            throw new MessageException(violationMsg, cv);
         }
     }
 }
